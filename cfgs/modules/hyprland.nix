@@ -3,10 +3,10 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    # xwayland.enable = true; # If false -> Some applications won't open
     settings = {
       "$terminal" = "kitty";
-      "exec-once" = "$terminal & $terminal";
+      "$web-browser" = "firefox";
+      "exec-once" = "$terminal & $web-browser";
       # input
       input = {
         "kb_layout" = "latam";
@@ -16,6 +16,7 @@
       "$mainMod" = "SUPER";
       bind = [
         "$mainMod, E, exec, $terminal"
+	"$mainMod, W, exec, $web-browser"
         "$mainMod, Q, killactive"
         "$mainMod, F, togglefloating"
         "$mainMod, escape, exit"

@@ -2,34 +2,37 @@
 
 {
   # System programs, variables, packages, and services
+  nixpkgs.config.allowUnfree = true; # Allow unfree software, for drivers and most programs
   programs = {
     hyprland.enable = true;
   };
   environment = {
     sessionVariables = {
-      # NIXOS_OZONE_WL = "1";
+      # Forces electron apps to use Wayland, it might make a few programs crash or be worse
+      NIXOS_OZONE_WL = "1";
     };
     systemPackages = with upkgs; [
       neovim
-      kitty
-      firefox
       git
+      kitty
+      pavucontrol
+      firefox
+      #swaync -> Test on next generation
   ];};
   services = {
     blueman.enable = true;
     xserver = {
-      # enable = false; # Check if XWayland needs it (Xwayland = true at hyprland.nix)
+      enable = false; # Default: false, false until a program needs it
       xkb.layout = "latam";
     };
     pipewire = {
       enable = true;
-      pulse.enable = false; # Check if pipewire or volman need it, if so enable it
+      pulse.enable = false; # Check if pavucontrol needs it it, if not, delete all this line
   };};
 
   # Hardware
   hardware = {
-    # graphics.enable = false; # Enables HW acceleration (packages should enable it if needed)
-    # nvidia.modesetting.enable = false; # From NVIDIA propietary driver (can help compositors)
+    nvidia.modesetting.enable = false; # Default: false, false until hyprland needs it
     bluetooth = {
       enable = true;
       powerOnBoot = false; # Default: true
@@ -53,7 +56,7 @@
     gc = {automatic = true; dates = "daily";};
     settings = {
       experimental-features = ["flakes" "nix-command"];
-      auto-optimise-store = true; # Default: false (space vs speed)
+      auto-optimise-store = true; # Default: false, I care more about disk space
   };};
 
   # Console
