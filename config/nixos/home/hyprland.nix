@@ -1,16 +1,16 @@
-{...}:
+{...}: {
 
-{
 wayland.windowManager.hyprland = {
   enable = true;
   settings = {
+
     # Programs to execute
     "$terminal" = "kitty";
     "$web-browser" = "firefox";
     "exec-once" = "$terminal & $web-browser";
 
     # Monitor
-    "monitor" = "DP-1, 1920x1080@60.00, auto, 1.10"; # GEN 5 - TESTING MONITOR SCALE 
+    "monitor" = ", 1920x1080@60.00, auto, 1.10"; # GEN 5,6 - TESTING MONITOR SCALE 
     #"monitor" = ", preferred, auto, 1" # Template for new monitors
 
     # Input
@@ -28,7 +28,9 @@ wayland.windowManager.hyprland = {
       "$mainMod, Q, killactive"
       "$mainMod, F, togglefloating"
       "$mainMod, escape, exit"
-];};};}
+    ];
+
+};};}
 /*
 
 env = XCURSOR_SIZE,24

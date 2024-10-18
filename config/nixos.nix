@@ -1,4 +1,6 @@
-{pkgs/* nixpkgs.pkgs respecting nixpkgs.config */, home, host-name, user-name, ...}: {
+{pkgs, home, host-name, user-name, ...}: {
+
+# Programs, services, etc
 
 environment = {
   sessionVariables = {
@@ -11,17 +13,17 @@ environment = {
     pavucontrol
     firefox # Move to programs + nixos config pending (on a .nix imported file)
     swaynotificationcenter # Home-manager config pending
-    discord # --------------- GEN 5 - TESTING DISCORD
-    # mangohud # TEST ON GEN 6 | Home-manager config pending
-    # rclone # TEST ON GEN 6 (for retrieving collection from cloud)
+    discord # --------------- GEN 6 - TESTING DISCORD
+    # mangohud # TEST ON GEN ??? | Home-manager config pending
+    # rclone # TEST ON GEN ??? (for retrieving collection from cloud)
 ];};
 
 programs = {
   hyprland.enable = true;
-  # gamemode.enable = true; # TEST ON GEN 6
+  # gamemode.enable = true; # TEST ON GEN ???
   steam = {
-    enable = true; # ------------------- GEN 5 - TESTING STEAM
-    # gamescopeSession.enable = true; # TEST ON GEN 6
+    enable = true; # ------------------- GEN 6 - TESTING STEAM
+    # gamescopeSession.enable = true; # TEST ON GEN ???
 };};
 
 services = {
@@ -29,17 +31,19 @@ services = {
   xserver = {
     enable = false; # Default: false, false until a program needs it
     xkb.layout = "latam";
-    videoDrivers = ["nvidia"]; # --------------- GEN 5 - TESTING NVIDIA PROPIETARY DRIVERS 
+    videoDrivers = ["nvidia"]; # --------------- GEN 6 - TESTING NVIDIA PROPIETARY DRIVERS 
   };
   pipewire = {
     enable = true;
     pulse.enable = true; # Default: false, but it allows pavucontrol to manage audio
 };};
 
+# General options
+
 hardware = {
   nvidia = { 
-    open = true; # ------------------ GEN 5 - TESTING OPEN NVIDIA KERNEL MODULE
-    modesetting.enable = false; # Default: false, false until hyprland needs it
+    open = true; # ------------------ GEN 6 - TESTING OPEN NVIDIA KERNEL MODULE
+    modesetting.enable = true; # Default: ------------- GEN 6 - TESTING FOR HYPRLAND
   };
   bluetooth = {
     enable = true;
@@ -60,17 +64,6 @@ networking = {
 console.useXkbConfig = true;
 time.timeZone = "Chile/Continental";
 i18n.defaultLocale = "en_US.UTF-8";
-
-nix = {
-  gc = {automatic = true; dates = "daily";};
-  settings = {
-    experimental-features = ["flakes" "nix-command"];
-    auto-optimise-store = true; # Default: false, I care more about disk space
-};};
-
-nixpkgs = {
-  config.allowUnfree = true; # RIP GNU
-};
 
 # Remember to "#passwd" each user
 users.users = {
@@ -95,11 +88,27 @@ fonts = {
       emoji = ["Noto Color Emoji"];
 };};};
 
+
+# System options
+
+nix = {
+  gc = {automatic = true; dates = "daily";};
+  settings = {
+    experimental-features = ["flakes" "nix-command"];
+    auto-optimise-store = true; # Default: false, I care more about disk space
+};};
+
+nixpkgs = {
+  config.allowUnfree = true; # RIP GNU
+};
+
+system.stateVersion = "24.05";
+
+# Extensions
 imports = [
   ./nixos/hardware.nix
   ./nixos/home.nix
   home.nixosModules.home-manager
-]; 
+];
 
-system.stateVersion = "24.05"; 
 }
