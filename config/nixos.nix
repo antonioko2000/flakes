@@ -13,7 +13,7 @@ environment = {
     pavucontrol
     firefox # Move to programs + nixos config pending (on a .nix imported file)
     swaynotificationcenter # Home-manager config pending
-    discord # --------------- GEN 6 - TESTING DISCORD
+    discord # --------------- GEN 7 - TESTING DISCORD
     # mangohud # TEST ON GEN ??? | Home-manager config pending
     # rclone # TEST ON GEN ??? (for retrieving collection from cloud)
 ];};
@@ -22,7 +22,7 @@ programs = {
   hyprland.enable = true;
   # gamemode.enable = true; # TEST ON GEN ???
   steam = {
-    enable = true; # ------------------- GEN 6 - TESTING STEAM
+    enable = true; # ------------------- GEN 7 - TESTING STEAM
     # gamescopeSession.enable = true; # TEST ON GEN ???
 };};
 
@@ -31,7 +31,7 @@ services = {
   xserver = {
     enable = false; # Default: false, false until a program needs it
     xkb.layout = "latam";
-    videoDrivers = ["nvidia"]; # --------------- GEN 6 - TESTING NVIDIA PROPIETARY DRIVERS 
+    videoDrivers = ["nvidia"]; 
   };
   pipewire = {
     enable = true;
@@ -42,8 +42,8 @@ services = {
 
 hardware = {
   nvidia = { 
-    open = true; # ------------------ GEN 6 - TESTING OPEN NVIDIA KERNEL MODULE
-    modesetting.enable = true; # Default: ------------- GEN 6 - TESTING FOR HYPRLAND
+    open = true; 
+    modesetting.enable = true; # Default: false, but it fixes weird graphical glitches with nvidia
   };
   bluetooth = {
     enable = true;

@@ -10,7 +10,7 @@ wayland.windowManager.hyprland = {
     "exec-once" = "$terminal & $web-browser";
 
     # Monitor
-    "monitor" = ", 1920x1080@60.00, auto, 1.10"; # GEN 5,6 - TESTING MONITOR SCALE 
+    "monitor" = ", 1920x1080@60.00, auto, 1.200000"; # GEN 7 - TESTING MONITOR SCALE 
     #"monitor" = ", preferred, auto, 1" # Template for new monitors
 
     # Input
