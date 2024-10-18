@@ -1,33 +1,38 @@
 {...}:
 
 {
-  wayland.windowManager.hyprland = {
-    enable = true;
-    settings = {
-      "$terminal" = "kitty";
-      "$web-browser" = "firefox";
-      "exec-once" = "$terminal & $web-browser";
-      # input
-      input = {
-        "kb_layout" = "latam";
-        "follow_mouse" = 1; # Focus with Mouse. 0 is disabled, 1 is always, 2 clicking
-        "sensitivity" = -1.0; # Range: -1.0 to 1.0
-      };
-      "$mainMod" = "SUPER";
-      bind = [
-        "$mainMod, E, exec, $terminal"
-	"$mainMod, W, exec, $web-browser"
-        "$mainMod, Q, killactive"
-        "$mainMod, F, togglefloating"
-        "$mainMod, escape, exit"
+wayland.windowManager.hyprland = {
+  enable = true;
+  settings = {
+    # Programs to execute
+    "$terminal" = "kitty";
+    "$web-browser" = "firefox";
+    "exec-once" = "$terminal & $web-browser";
+
+    # Monitor
+    "monitor" = "DP-1, 1920x1080@60.00, auto, 1.10"; # GEN 5 - TESTING MONITOR SCALE 
+    #"monitor" = ", preferred, auto, 1" # Template for new monitors
+
+    # Input
+    input = {
+      "kb_layout" = "latam";
+      "follow_mouse" = 1; # Mouse focus options. 0=disabled, 1=always on, 2=on click
+      "sensitivity" = -1.0; # Mouse sensitivity/acceleration | Range: -1.0 to 1.0
+    };
+      
+    # Keybinds
+    "$mainMod" = "SUPER";
+    bind = [
+      "$mainMod, E, exec, $terminal"
+      "$mainMod, W, exec, $web-browser"
+      "$mainMod, Q, killactive"
+      "$mainMod, F, togglefloating"
+      "$mainMod, escape, exit"
 ];};};}
 /*
 
-monitor=,preferred,auto,auto
-
 env = XCURSOR_SIZE,24
 env = HYPRCURSOR_SIZE,24
-
 
 general {
     gaps_in = 5

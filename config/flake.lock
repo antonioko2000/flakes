@@ -1,17 +1,17 @@
 {
   "nodes": {
-    "hm": {
+    "locked-home": {
       "inputs": {
         "nixpkgs": [
-          "unstablepackages"
+          "locked-unstable"
         ]
       },
       "locked": {
-        "lastModified": 1729174520,
-        "narHash": "sha256-QxCAdgQdeIOaCiE0Sr23s9lD0+T1b/wuz5pSiGwNrCQ=",
+        "lastModified": 1729260213,
+        "narHash": "sha256-jAvHoU/1y/yCuXzr2fNF+q6uKmr8Jj2xgAisK4QB9to=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e78cbb20276f09c1802e62d2f77fc93ec32da268",
+        "rev": "09a0c0c02953318bf94425738c7061ffdc4cba75",
         "type": "github"
       },
       "original": {
@@ -20,13 +20,7 @@
         "type": "github"
       }
     },
-    "root": {
-      "inputs": {
-        "hm": "hm",
-        "unstablepackages": "unstablepackages"
-      }
-    },
-    "unstablepackages": {
+    "locked-unstable": {
       "locked": {
         "lastModified": 1728888510,
         "narHash": "sha256-nsNdSldaAyu6PE3YUA+YQLqUDJh+gRbBooMMekZJwvI=",
@@ -40,6 +34,12 @@
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "locked-home": "locked-home",
+        "locked-unstable": "locked-unstable"
       }
     }
   },

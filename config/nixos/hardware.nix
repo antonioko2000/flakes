@@ -1,27 +1,28 @@
-{modulesPath, lib, config, ...}:
+{modulesPath /* local nixos modules */, lib /* basically nixpkgs.pkgs.lib */, config, ...}:
 
 {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+# Default from generated hardware-configuration.nix on my machine, except for "devices"
+boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+boot.initrd.kernelModules = [ ];
+boot.kernelModules = ["kvm-intel"];
+boot.extraModulePackages = [ ];
+fileSystems."/" = {device = "/dev/disk/by-label/NIXROOT"; fsType = "ext4";};
+fileSystems."/boot" = {
+  device = "/dev/disk/by-label/NIXBOOT";
+  fsType = "vfat";
+  options = [ "fmask=0022" "dmask=0022" ];
+};
+swapDevices = [ ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [ ];
+# Uses the nixpkgs from the system that has nixpkgs.pkgs from the flake
+nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  fileSystems."/" = {device = "/dev/disk/by-label/NIXROOT"; fsType = "ext4";};
+# Generic solution for network
+networking.useDHCP = lib.mkDefault true;
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/NIXBOOT";
-    fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
-  };
+# Default from generated hardware-configuration.nix on my machine
+hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  swapDevices = [ ];
-
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+# Extensions 
+imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 }
