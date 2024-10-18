@@ -8,16 +8,16 @@
   };
   environment = {
     sessionVariables = {
-      # Forces electron apps to use Wayland, it might make a few programs crash or be worse
+      # Forces electron apps to use Wayland, it could make a few programs to crash and such
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with upkgs; [
-      neovim
-      git
-      kitty
+      neovim # Home-manager config pending
+      git # Home-manager config pending
+      kitty # Home-manager config pending
       pavucontrol
-      firefox
-      #swaync -> Test on next generation
+      firefox # Move to programs + nixos config pending (on a .nix imported file)
+      swaynotificationcenter # Home-manager config pending
   ];};
   services = {
     blueman.enable = true;
@@ -27,7 +27,7 @@
     };
     pipewire = {
       enable = true;
-      pulse.enable = false; # Check if pavucontrol needs it it, if not, delete all this line
+      pulse.enable = true; # Checking if it fixes an error after launching pavucontrol
   };};
 
   # Hardware
@@ -35,7 +35,7 @@
     nvidia.modesetting.enable = false; # Default: false, false until hyprland needs it
     bluetooth = {
       enable = true;
-      powerOnBoot = false; # Default: true
+      powerOnBoot = true; # Default: true, had it on false, now testing how 'true' behaves
   };};
 
   # Boot
