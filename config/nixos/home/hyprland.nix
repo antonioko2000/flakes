@@ -20,10 +20,7 @@
         "$mainMod, Q, killactive"
         "$mainMod, F, togglefloating"
         "$mainMod, escape, exit"
-      ];
-    };
-  };
-}
+];};};}
 /*
 
 monitor=,preferred,auto,auto

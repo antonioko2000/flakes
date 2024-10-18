@@ -1,13 +1,12 @@
 {
-  description = "My current PC NixOS install flake (with Home Manager as a module)";
+  description = "My current PC NixOS configuration flake (with Home Manager as a module)";
  
   inputs = {
     unstablepackages.url = "github:nixos/nixpkgs/nixos-unstable";
     hm = {
       url = "github:nix-community/home-manager";      
       inputs.nixpkgs.follows = "unstablepackages";
-    };
-  };
+  };};
 
   outputs = {unstablepackages, hm, ...}: 
   let
@@ -19,8 +18,5 @@
     nixosConfigurations = {
       ${host-name} = unstablepackages.lib.nixosSystem {
         specialArgs = {inherit hm host-name user-name upkgs;};
-        modules = [./configuration.nix];
-      };
-    };
-  };
-}
+        modules = [./nixos.nix];
+};};};}

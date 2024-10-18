@@ -27,7 +27,7 @@
     };
     pipewire = {
       enable = true;
-      pulse.enable = true; # Checking if it fixes an error after launching pavucontrol
+      pulse.enable = true; # Default: false, but it allows pavucontrol to manage audio
   };};
 
   # Hardware
@@ -35,7 +35,7 @@
     nvidia.modesetting.enable = false; # Default: false, false until hyprland needs it
     bluetooth = {
       enable = true;
-      powerOnBoot = true; # Default: true, had it on false, now testing how 'true' behaves
+      powerOnBoot = false; # Default: true, but I prefer to enable bluetooth manually/boot
   };};
 
   # Boot
@@ -48,7 +48,7 @@
   networking = {
     hostName = host-name; 
     networkmanager.enable = true; 
-    firewall.enable = false; # Default: true
+    firewall.enable = false; # Default: true, I do not even know how to use firewalls
   };
  
   # Nix
@@ -80,7 +80,7 @@
       enable = true;
       antialias = true;
       hinting = {
-        enable = false; # Default: true
+        enable = false; # Default: true, I could enable it but I think hinting is meh
         style = "full"; # Default: "slight"
       };
       defaultFonts = {
@@ -91,7 +91,11 @@
   };};};
 
   # Extensions
-  imports = [./hardware-configuration.nix ./home.nix hm.nixosModules.home-manager]; 
+  imports = [
+    ./nixos/hardware.nix
+    ./nixos/home.nix
+    hm.nixosModules.home-manager
+  ]; 
 
   system.stateVersion = "24.05";
 }
