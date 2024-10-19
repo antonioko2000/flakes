@@ -5,163 +5,173 @@ wayland.windowManager.hyprland = {
   settings = {
 
     # Programs to execute
-    "$terminal" = "kitty";
+    "$terminal-emulator" = "kitty";
     "$web-browser" = "firefox";
-    "exec-once" = "$terminal & $web-browser";
+    "$bluetooth-app" = "blueman";
+    "$volume-app" = "pavucontrol";
+    
+    general = {
+      "border_size" = 0;
+      "no_border_on_floating" = "false";
+      "gaps_in" = 10;
+      "gaps_out" = 10;
+      "col.inactive_border" = "0xff444444";
+      "col.active_border" = "0xffaaaaaa";
+      "layout" = "dwindle"; # dwindle or master
+      "no_focus_fallback" = "true";
+      "resize_on_border" = "true";
+      "extend_border_grab_area" = 15;
+      "allow_tearing" = "false";
+    };
 
-    # Monitor
-    "monitor" = ", 1920x1080@60.00, auto, 1.200000"; # GEN 7 - TESTING MONITOR SCALE 
-    #"monitor" = ", preferred, auto, 1" # Template for new monitors
+    decoration = {
+      "rounding" = 5;
+      "active_opacity" = 1.0;
+      "inactive_opacity" = 0.85;
+      "drop_shadow" = "true";
+      "shadow_range" = 4;
+      "shadow_render_power" = 3;
+      "shadow_ignore_window" = "true";
+      "col.shadow" = "0xee1a1a1a";
+      "dim_inactive" = "false";
+      "dim_strength" = 0.5;
+      blur = {
+        "enabled" = "true";
+        "size" = 8;
+        "passes" = 1;
+        "ignore_opacity" = "false";
+        "new_optimizations" = "true";
+        "xray" = "true";
+      };
+    };
 
-    # Input
+    animations = {
+      "enabled" = "true";
+      "first_launch_animation" = "true";
+      # Set advanced animations on later generations
+    };
+    
     input = {
       "kb_layout" = "latam";
+      "numlock_by_default" = "false";
+      "repeat_rate" = 60;
+      "repeat_delay" = 250;
+      "sensitivity" = 0.0; # Mouse sensitivity/acceleration. Range: -1.0 to 1.0
+      "accel_profile" = "adaptive"; # Adaptive, flat, custom or empty
+      "force_no_accel" = "false";
       "follow_mouse" = 1; # Mouse focus options. 0=disabled, 1=always on, 2=on click
-      "sensitivity" = -1.0; # Mouse sensitivity/acceleration | Range: -1.0 to 1.0
+      "focus_on_close" = 0; # 0=next window, 1=window under cursor
+      "mouse_refocus" = "true";
+      "float_switch_override_focus" = "1";
     };
-      
+
+    misc = {
+      "disable_hyprland_logo" = "false";
+      "font_family" = "";
+      "vrr" = 0; # Adaptive Sync
+      "animate_manual_resizes" = "true";
+      "animate_mouse_windowdragging" = "true";
+      "enable_swallow" = "false";
+      "render_ahead_of_time" = "false";
+      "render_ahead_safezone" = 1;
+      "new_window_takes_over_fullscreen" = 0;
+      "exit_window_retains_fullscreen" = "false";
+      "middle_click_paste" = "false";
+    };
+
+    binds = {
+      "pass_mouse_when_bound" = "false";
+      "scroll_event_delay" = "300";
+      "workspace_center_on" = 1;
+      "focus_preferred_method" = 0;
+      "movefocus_cycles_fullscreen" = "true";
+      "disable_keybind_grabbing" = "false";
+    };
+
+    xwayland = {
+      "enabled" = "true";
+      "use_nearest_neighbor" = "true";
+      "force_zero_scaling" = "true";
+    };
+
+    opengl = {
+      "nvidia_anti_flicker" = "true";
+      "force_intospection" = 2;
+    };
+
+    render = {
+      "explicit_sync" = 2;
+      "direct_scanout" = "false";
+    };
+
+    cursor = {
+      "sync_gsettings_theme" = "true";
+      "no_hardware_cursors" = "false";
+      "no_break_fs_vrr" = "false";
+      "hotspot_padding" = 1;
+      "inactive_timeout" = 0;
+      "zoom_factor" = 1.0;
+      "hide_on_key_press" = "false";
+      "allow_dumb_copy" = "false";
+    };
+
+    # Keywords
+    "exec-once" = "$terminal & $web-browser";
+    env = [
+    "XCURSOR_SIZE,24"
+    "HYPRCURSOR_SIZE,24"
+    ];
+
+    # Monitors
+    "monitor" = ",1920x1080@60.00,auto,auto";  
+
     # Keybinds
-    "$mainMod" = "SUPER";
     bind = [
-      "$mainMod, E, exec, $terminal"
-      "$mainMod, W, exec, $web-browser"
-      "$mainMod, Q, killactive"
-      "$mainMod, F, togglefloating"
-      "$mainMod, escape, exit"
+      
+      # Execution
+      "SUPER, E, exec, $terminal-emulator"
+      "SUPER, W, exec, $web-browser"
+      "SUPER, B, exec, $bluetooth-app"
+      "SUPER, V, exec, $volume-app"
+      "SUPER, S, exec, steam"
+      "SUPER, D, exec, discord"
+
+      # Windows
+      "CTRL+SHIFT, Q, killactive"
+      "CTRL+SHIFT, S, togglefloating"
+      "CTRL+SHIFT, F, fullscreen, 1"
+      "CTRL+SHIFT, P, pin"
+      "CTRL+SHIFT, C, centerwindow"
+      "CTRL+SHIFT, Left, swapwindow, l"
+      "CTRL+SHIFT, Up, swapwindow, u"
+      "CTRL+SHIFT, Right, swapwindow, r"
+      "CTRL+SHIFT, Down, swapwindow, d"
+
+      # Workspaces
+      "CAPS, 1, movetoworspacesilent, 1"
+      "CAPS, 2, movetoworspacesilent, 2"
+      "CAPS, 3, movetoworspacesilent, 3"
+      "CAPS+SHIFT, 1, workspace, 1"
+      "CAPS+SHIFT, 2, workspace, 2"
+      "CAPS+SHIFT, 3, workspace, 3"
+      "CAPS+SHIFT, Escape, exit"
+      
+      # Focus
+      "SHIFT+ALT, Left, movefocus, l"
+      "SHIFT+ALT, Up, movefocus, u"
+      "SHIFT+ALT, Right, movefocus, r"
+      "SHIFT+ALT, Down, movefocus, d"
+      "SHIFT+ALT, Q, cyclenext, prev"
+      "SHIFT+ALT, E, cyclenext"
+
+      # Special keys
+      ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
+      ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
+      ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      # ", XF86AudioNext, exec, playerctl next"
+      # ", XF86AudioPause, exec, playerctl play-pause"
+      # ", XF86AudioPlay, exec, playerctl play-pause"
+      # ", XF86AudioPrev, exec, playerctl previous"
     ];
 
 };};}
-/*
-
-env = XCURSOR_SIZE,24
-env = HYPRCURSOR_SIZE,24
-
-general {
-    gaps_in = 5
-    gaps_out = 20
-
-    border_size = 2
-
-    # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-    col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-    col.inactive_border = rgba(595959aa)
-
-    # Set to true enable resizing windows by clicking and dragging on borders and gaps
-    resize_on_border = false
-
-    # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
-    allow_tearing = false
-
-    layout = dwindle
-}
-
-decoration {
-    rounding = 10
-
-    active_opacity = 1.0
-    inactive_opacity = 1.0
-
-    drop_shadow = true
-    shadow_range = 4
-    shadow_render_power = 3
-    col.shadow = rgba(1a1a1aee)
-
-    blur {
-        enabled = true
-        size = 3
-        passes = 1
-
-        vibrancy = 0.1696
-    }
-}
-
-animations {
-    enabled = true
-
-    bezier = myBezier, 0.05, 0.9, 0.1, 1.05
-
-    animation = windows, 1, 7, myBezier
-    animation = windowsOut, 1, 7, default, popin 80%
-    animation = border, 1, 10, default
-    animation = borderangle, 1, 8, default
-    animation = fade, 1, 7, default
-    animation = workspaces, 1, 6, default
-}
-
-dwindle {
-    pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-    preserve_split = true # You probably want this
-}
-
-master {
-    new_status = master
-}
-
-misc {
-    force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
-    disable_hyprland_logo = false # If true disables the random hyprland logo / anime girl background. :(
-}
-
-
-
-gestures {
-    workspace_swipe = false
-}
-
-device {
-    name = epic-mouse-v1
-    sensitivity = -0.5
-}
-
-bind = $mainMod, R, exec, $menu
-bind = $mainMod, P, pseudo, # dwindle
-bind = $mainMod, J, togglesplit, # dwindle
-
-bind = $mainMod, left, movefocus, l
-bind = $mainMod, right, movefocus, r
-bind = $mainMod, up, movefocus, u
-bind = $mainMod, down, movefocus, d
-
-bind = $mainMod, 1, workspace, 1
-bind = $mainMod, 2, workspace, 2
-bind = $mainMod, 3, workspace, 3
-bind = $mainMod, 4, workspace, 4
-bind = $mainMod, 5, workspace, 5
-bind = $mainMod, 6, workspace, 6
-bind = $mainMod, 7, workspace, 7
-bind = $mainMod, 8, workspace, 8
-bind = $mainMod, 9, workspace, 9
-bind = $mainMod, 0, workspace, 10
-
-bind = $mainMod SHIFT, 1, movetoworkspace, 1
-bind = $mainMod SHIFT, 2, movetoworkspace, 2
-bind = $mainMod SHIFT, 3, movetoworkspace, 3
-bind = $mainMod SHIFT, 4, movetoworkspace, 4
-bind = $mainMod SHIFT, 5, movetoworkspace, 5
-bind = $mainMod SHIFT, 6, movetoworkspace, 6
-bind = $mainMod SHIFT, 7, movetoworkspace, 7
-bind = $mainMod SHIFT, 8, movetoworkspace, 8
-bind = $mainMod SHIFT, 9, movetoworkspace, 9
-bind = $mainMod SHIFT, 0, movetoworkspace, 10
-
-bind = $mainMod, S, togglespecialworkspace, magic
-bind = $mainMod SHIFT, S, movetoworkspace, special:magic
-
-bind = $mainMod, mouse_down, workspace, e+1
-bind = $mainMod, mouse_up, workspace, e-1
-
-bindm = $mainMod, mouse:272, movewindow
-bindm = $mainMod, mouse:273, resizewindow
-
-bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-bindel = ,XF86MonBrightnessUp, exec, brightnessctl s 10%+
-bindel = ,XF86MonBrightnessDown, exec, brightnessctl s 10%-
-
-bindl = , XF86AudioNext, exec, playerctl next
-bindl = , XF86AudioPause, exec, playerctl play-pause
-bindl = , XF86AudioPlay, exec, playerctl play-pause
-bindl = , XF86AudioPrev, exec, playerctl previous
-*/

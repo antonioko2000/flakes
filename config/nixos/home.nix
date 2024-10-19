@@ -1,7 +1,7 @@
 {user-name, ...}: {
 
 home-manager = {
-  # Needed (enabled) options for using NixOS nixpkgs and custom vm or shell nix builds
+  # Needed (enabled) options for using NixOS nixpkgs & custom vm or shell nix builds
   useGlobalPkgs = true;
   useUserPackages = true;
   

@@ -4,7 +4,7 @@
 
 environment = {
   sessionVariables = {
-    NIXOS_OZONE_WL = "1"; # Hints programs to use Wayland (unstable but better rendering)
+    NIXOS_OZONE_WL = "1"; # Hints programs to use Wayland (unstable, but better rendering)
   };
   systemPackages = with pkgs; [
     neovim # Home-manager config pending
@@ -13,17 +13,18 @@ environment = {
     pavucontrol
     firefox # Move to programs + nixos config pending (on a .nix imported file)
     swaynotificationcenter # Home-manager config pending
-    discord # --------------- GEN 7 - TESTING DISCORD
-    # mangohud # TEST ON GEN ??? | Home-manager config pending
-    # rclone # TEST ON GEN ??? (for retrieving collection from cloud)
+    discord
+    walker # --------------------- GEN 8 TESTING ---------------------------- 
+    # mangohud # TEST ON GEN ???
+    # rclone # TEST ON GEN ???
 ];};
 
 programs = {
   hyprland.enable = true;
   # gamemode.enable = true; # TEST ON GEN ???
   steam = {
-    enable = true; # ------------------- GEN 7 - TESTING STEAM
-    # gamescopeSession.enable = true; # TEST ON GEN ???
+    enable = true;
+    # gamescopeSession.enable = true; # TEST ON GEN ??? (Hyprland recommends it)
 };};
 
 services = {
@@ -43,7 +44,7 @@ services = {
 hardware = {
   nvidia = { 
     open = true; 
-    modesetting.enable = true; # Default: false, but it fixes weird graphical glitches with nvidia
+    modesetting.enable = true; # Default: false, fixes nvidia drivers graphical glitches
   };
   bluetooth = {
     enable = true;
