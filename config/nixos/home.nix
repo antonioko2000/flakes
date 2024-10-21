@@ -18,6 +18,7 @@ home-manager = {
       # Extensions
       imports = [
         ./home/hyprland.nix
+	./home/fuzzel.nix
       ];
     };
 
